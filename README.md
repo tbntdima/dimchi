@@ -28,8 +28,40 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`dimchi add-project [FILE]`](#dimchi-add-project-file)
+* [`dimchi destroy`](#dimchi-destroy)
 * [`dimchi hello [FILE]`](#dimchi-hello-file)
 * [`dimchi help [COMMAND]`](#dimchi-help-command)
+* [`dimchi init`](#dimchi-init)
+* [`dimchi open`](#dimchi-open)
+* [`dimchi test`](#dimchi-test)
+
+## `dimchi add-project [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ dimchi add-project [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+```
+
+_See code: [src/commands/add-project.ts](https://github.com/tbntdima/dimchi/blob/v0.0.0/src/commands/add-project.ts)_
+
+## `dimchi destroy`
+
+Clean up config
+
+```
+USAGE
+  $ dimchi destroy
+```
+
+_See code: [src/commands/destroy.ts](https://github.com/tbntdima/dimchi/blob/v0.0.0/src/commands/destroy.ts)_
 
 ## `dimchi hello [FILE]`
 
@@ -67,4 +99,40 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.2/src/commands/help.ts)_
+
+## `dimchi init`
+
+Init config
+
+```
+USAGE
+  $ dimchi init
+
+OPTIONS
+  -u, --update
+```
+
+_See code: [src/commands/init.ts](https://github.com/tbntdima/dimchi/blob/v0.0.0/src/commands/init.ts)_
+
+## `dimchi open`
+
+Open current task in notion
+
+```
+USAGE
+  $ dimchi open
+```
+
+_See code: [src/commands/open.ts](https://github.com/tbntdima/dimchi/blob/v0.0.0/src/commands/open.ts)_
+
+## `dimchi test`
+
+describe the command here
+
+```
+USAGE
+  $ dimchi test
+```
+
+_See code: [src/commands/test.ts](https://github.com/tbntdima/dimchi/blob/v0.0.0/src/commands/test.ts)_
 <!-- commandsstop -->
