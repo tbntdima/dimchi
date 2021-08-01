@@ -1,7 +1,7 @@
 {
   "name": "dimchi",
   "description": "Simplify the process of writing notes by combining your workflow with cli and notes editor (notion.so)",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": {
     "name": "Dima An",
     "email": "dmitriym44@gmail.com",

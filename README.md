@@ -19,7 +19,7 @@ $ npm install -g dimchi
 $ dimchi COMMAND
 running command...
 $ dimchi (-v|--version|version)
-dimchi/0.0.0 darwin-x64 node-v14.17.3
+dimchi/0.0.1 darwin-x64 node-v14.17.3
 $ dimchi --help [COMMAND]
 USAGE
   $ dimchi COMMAND
@@ -28,29 +28,23 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`dimchi add-project [FILE]`](#dimchi-add-project-file)
+* [`dimchi add-project`](#dimchi-add-project)
 * [`dimchi destroy`](#dimchi-destroy)
 * [`dimchi hello [FILE]`](#dimchi-hello-file)
 * [`dimchi help [COMMAND]`](#dimchi-help-command)
 * [`dimchi init`](#dimchi-init)
 * [`dimchi open`](#dimchi-open)
-* [`dimchi test`](#dimchi-test)
 
-## `dimchi add-project [FILE]`
+## `dimchi add-project`
 
-describe the command here
+Add project
 
 ```
 USAGE
-  $ dimchi add-project [FILE]
-
-OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
+  $ dimchi add-project
 ```
 
-_See code: [src/commands/add-project.ts](https://github.com/tbntdima/dimchi/blob/v0.0.0/src/commands/add-project.ts)_
+_See code: [src/commands/add-project.ts](https://github.com/tbntdima/dimchi/blob/v0.0.1/src/commands/add-project.ts)_
 
 ## `dimchi destroy`
 
@@ -61,7 +55,7 @@ USAGE
   $ dimchi destroy
 ```
 
-_See code: [src/commands/destroy.ts](https://github.com/tbntdima/dimchi/blob/v0.0.0/src/commands/destroy.ts)_
+_See code: [src/commands/destroy.ts](https://github.com/tbntdima/dimchi/blob/v0.0.1/src/commands/destroy.ts)_
 
 ## `dimchi hello [FILE]`
 
@@ -81,7 +75,7 @@ EXAMPLE
   hello world from ./src/hello.ts!
 ```
 
-_See code: [src/commands/hello.ts](https://github.com/tbntdima/dimchi/blob/v0.0.0/src/commands/hello.ts)_
+_See code: [src/commands/hello.ts](https://github.com/tbntdima/dimchi/blob/v0.0.1/src/commands/hello.ts)_
 
 ## `dimchi help [COMMAND]`
 
@@ -112,7 +106,7 @@ OPTIONS
   -u, --update
 ```
 
-_See code: [src/commands/init.ts](https://github.com/tbntdima/dimchi/blob/v0.0.0/src/commands/init.ts)_
+_See code: [src/commands/init.ts](https://github.com/tbntdima/dimchi/blob/v0.0.1/src/commands/init.ts)_
 
 ## `dimchi open`
 
@@ -123,16 +117,5 @@ USAGE
   $ dimchi open
 ```
 
-_See code: [src/commands/open.ts](https://github.com/tbntdima/dimchi/blob/v0.0.0/src/commands/open.ts)_
-
-## `dimchi test`
-
-describe the command here
-
-```
-USAGE
-  $ dimchi test
-```
-
-_See code: [src/commands/test.ts](https://github.com/tbntdima/dimchi/blob/v0.0.0/src/commands/test.ts)_
+_See code: [src/commands/open.ts](https://github.com/tbntdima/dimchi/blob/v0.0.1/src/commands/open.ts)_
 <!-- commandsstop -->
