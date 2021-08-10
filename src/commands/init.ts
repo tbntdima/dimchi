@@ -6,6 +6,10 @@ import { Client } from "@notionhq/client";
 
 import { TOOL_NAME } from "../consts";
 
+export const service = TOOL_NAME;
+export const accountNotionSecret = `${TOOL_NAME}-notion-secret`;
+export const accountNotionRootPageId = `${TOOL_NAME}-notion-root-page-id`;
+export const accountNotionRootDatabaseId = `${TOOL_NAME}-notion-root-database-id`;
 export default class Init extends Command {
   static description = "Init config";
 
@@ -16,11 +20,6 @@ export default class Init extends Command {
 
   async run() {
     const { flags } = this.parse(Init);
-
-    const service = TOOL_NAME;
-    const accountNotionSecret = `${TOOL_NAME}-notion-secret`;
-    const accountNotionRootPageId = `${TOOL_NAME}-notion-root-page-id`;
-    const accountNotionRootDatabaseId = `${TOOL_NAME}-notion-root-database-id`;
 
     const notionSecret = await keytar.getPassword(service, accountNotionSecret);
 

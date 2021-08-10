@@ -14,11 +14,13 @@
   "devDependencies": {
     "@oclif/dev-cli": "^1.26.0",
     "@oclif/test": "^1.2.8",
+    "@types/app-root-path": "^1.2.4",
     "@types/chai": "^4.2.16",
     "@types/current-git-branch": "^1.1.2",
     "@types/git-repo-name": "^1.0.1",
     "@types/inquirer": "^7.3.3",
     "@types/mocha": "^5.2.7",
+    "@types/nconf": "^0.10.1",
     "@types/node": "^10.17.60",
     "chai": "^4.3.4",
     "eslint": "^5.16.0",
@@ -66,16 +68,19 @@
   },
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@notionhq/client": "^0.2.3",
+    "@notionhq/client": "^0.2.4",
     "@oclif/command": "^1.8.0",
     "@oclif/config": "^1.17.0",
     "@oclif/plugin-help": "^3.2.2",
+    "app-root-path": "^3.0.0",
     "chalk": "^4.1.2",
     "current-git-branch": "^1.1.0",
     "git-repo-name": "^1.0.1",
     "inquirer": "^8.1.2",
     "keytar": "^7.7.0",
+    "nconf": "^0.11.3",
     "open": "^8.2.1",
+    "simple-git": "^2.42.0",
     "tslib": "^1.14.1"
   }
 }
