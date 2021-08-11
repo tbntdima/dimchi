@@ -19,7 +19,7 @@ $ npm install -g dimchi
 $ dimchi COMMAND
 running command...
 $ dimchi (-v|--version|version)
-dimchi/0.0.2 darwin-x64 node-v14.17.3
+dimchi/0.0.3 darwin-x64 node-v14.17.3
 $ dimchi --help [COMMAND]
 USAGE
   $ dimchi COMMAND
@@ -44,7 +44,7 @@ ARGUMENTS
   PROJECTNAME  Name of the project
 ```
 
-_See code: [src/commands/add-project.ts](https://github.com/tbntdima/dimchi/blob/v0.0.2/src/commands/add-project.ts)_
+_See code: [src/commands/add-project.ts](https://github.com/tbntdima/dimchi/blob/v0.0.3/src/commands/add-project.ts)_
 
 ## `dimchi hello [FILE]`
 
@@ -64,7 +64,7 @@ EXAMPLE
   hello world from ./src/hello.ts!
 ```
 
-_See code: [src/commands/hello.ts](https://github.com/tbntdima/dimchi/blob/v0.0.2/src/commands/hello.ts)_
+_See code: [src/commands/hello.ts](https://github.com/tbntdima/dimchi/blob/v0.0.3/src/commands/hello.ts)_
 
 ## `dimchi help [COMMAND]`
 
@@ -96,7 +96,7 @@ OPTIONS
   -u, --update
 ```
 
-_See code: [src/commands/init.ts](https://github.com/tbntdima/dimchi/blob/v0.0.2/src/commands/init.ts)_
+_See code: [src/commands/init.ts](https://github.com/tbntdima/dimchi/blob/v0.0.3/src/commands/init.ts)_
 
 ## `dimchi open`
 
@@ -107,5 +107,5 @@ USAGE
   $ dimchi open
 ```
 
-_See code: [src/commands/open.ts](https://github.com/tbntdima/dimchi/blob/v0.0.2/src/commands/open.ts)_
+_See code: [src/commands/open.ts](https://github.com/tbntdima/dimchi/blob/v0.0.3/src/commands/open.ts)_
 <!-- commandsstop -->
