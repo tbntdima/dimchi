@@ -75,8 +75,11 @@ export default class Init extends Command {
             parent: { page_id: notionRootPageId },
             title: [{ type: "text", text: { content: "_database" } }],
             properties: {
-              Test: {
+              PageName: {
                 title: {},
+              },
+              PageId: {
+                rich_text: {},
               },
             },
           });
