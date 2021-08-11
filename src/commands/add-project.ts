@@ -22,7 +22,7 @@ export default class AddProject extends Command {
     } = this.parse(AddProject);
 
     // check if tool is initialized
-    nconf.file({ file: `${process.cwd()}/${TOOL_NAME}rc.json` });
+    nconf.file({ file: `./${TOOL_NAME}rc.json` });
     const existingNotionProjectPageId = nconf.get("notionProjectPageId");
 
     if (existingNotionProjectPageId) {
@@ -44,15 +44,12 @@ export default class AddProject extends Command {
     });
 
     // git ignore rc file
-    const excludeFilePath = `${appRootPath.path}/.git/info/exclude`;
+    const excludeFilePath = `./.git/info/exclude`;
     const excludeFileContent = await fs
       .readFileSync(excludeFilePath)
       .toString();
     if (!excludeFileContent.includes(`${TOOL_NAME}rc.json`)) {
-      await fs.appendFileSync(
-        `${appRootPath.path}/.git/info/exclude`,
-        `\n${TOOL_NAME}rc.json`
-      );
+      await fs.appendFileSync(`./.git/info/exclude`, `\n${TOOL_NAME}rc.json`);
     }
 
     // generate rc file

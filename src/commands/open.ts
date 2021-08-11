@@ -14,7 +14,7 @@ export default class Open extends Command {
   async run() {
     const notion = await getNotion();
     const gitBranch = getCurrentGitBranch();
-    nconf.file({ file: `${process.cwd()}/${TOOL_NAME}rc.json` });
+    nconf.file({ file: `./${TOOL_NAME}rc.json` });
     const notionProjectPageId = nconf.get("notionProjectPageId");
 
     // check if exists & open
