@@ -1,119 +1,65 @@
 import { Command } from "@oclif/command";
-import { Client } from "@notionhq/client";
-import * as keytar from "keytar";
-import * as repoName from "git-repo-name";
+import * as nconf from "nconf";
+import * as appRootPath from "app-root-path";
+import * as fs from "fs";
+
+import { TOOL_NAME } from "../consts";
+import { getNotion } from "../utils/notion";
+import { getNotionRootPageId } from "../utils/rootData";
 
 export default class AddProject extends Command {
-  static description = "Add project";
+  static args = [
+    {
+      name: "projectName",
+      required: true,
+      description: "Name of the project",
+    },
+  ];
 
   async run() {
-    const notionSecret = await keytar.getPassword(
-      "dimchi",
-      "dimchi-notion-secret"
-    );
-    const notionRootPageId = await keytar.getPassword(
-      "dimchi",
-      "dimchi-notion-root-page-id"
-    );
+    const {
+      args: { projectName },
+    } = this.parse(AddProject);
 
-    const gitRepoName = repoName.sync();
+    // check if tool is initialized
+    nconf.file({ file: `${appRootPath.path}/${TOOL_NAME}rc.json` });
+    const existingNotionProjectPageId = nconf.get("notionProjectPageId");
 
-    if (notionSecret && notionRootPageId) {
-      const notion = new Client({
-        auth: notionSecret,
-      });
-
-      const { results: rootPageChildren } = await notion.blocks.children.list({
-        block_id: notionRootPageId,
-      });
-
-      const foundProjectsDatabase = rootPageChildren.find(
-        (c) => c.type === "unsupported"
-      );
-
-      let databaseId;
-
-      if (foundProjectsDatabase) {
-        databaseId = foundProjectsDatabase.id;
-      } else {
-        const newDatabase = await notion.databases.create({
-          parent: { page_id: notionRootPageId },
-          title: [{ type: "text", text: { content: "PROJECTS" } }],
-          properties: {
-            Title: {
-              title: {},
-            },
-            Page: {
-              url: {},
-            },
-            PageId: {
-              rich_text: {},
-            },
-            DatabaseId: {
-              rich_text: {},
-            },
-          },
-        });
-        databaseId = newDatabase.id;
-      }
-
-      const {
-        results: [project],
-      } = await notion.databases.query({
-        database_id: databaseId,
-        filter: { property: "Title", text: { contains: gitRepoName } },
-      });
-
-      if (project) {
-        this.log("Project already exists");
-      } else {
-        const projectPage = await notion.pages.create({
-          parent: { page_id: notionRootPageId },
-          properties: { title: [{ text: { content: gitRepoName } }] },
-        });
-
-        const projectPageRetived = await notion.pages.retrieve({
-          page_id: projectPage.id,
-        });
-
-        const projectDatabase = await notion.databases.create({
-          parent: { page_id: projectPage.id },
-          title: [{ type: "text", text: { content: "PAGES" } }],
-          properties: {
-            Title: {
-              title: {},
-            },
-            Page: {
-              url: {},
-            },
-            PageId: {
-              rich_text: {},
-            },
-          },
-        });
-
-        await notion.pages.create({
-          parent: { database_id: databaseId },
-          properties: {
-            Title: {
-              title: [{ type: "text", text: { content: gitRepoName } }],
-            },
-            Page: {
-              url: projectPageRetived.url,
-            },
-            PageId: {
-              rich_text: [
-                { type: "text", text: { content: projectPageRetived.id } },
-              ],
-            },
-            DatabaseId: {
-              rich_text: [
-                { type: "text", text: { content: projectDatabase.id } },
-              ],
-            },
-          },
-        });
-      }
+    if (existingNotionProjectPageId) {
+      this.log("Project was already added");
+      return;
     }
+
+    // create a notion page with projectName
+    const notion = await getNotion();
+    const notionRootPageId = await getNotionRootPageId();
+    const { id: notionProjectPageId } = await notion.pages.create({
+      parent: {
+        page_id: notionRootPageId,
+      },
+      properties: {
+        // @ts-ignore
+        title: [{ text: { content: projectName } }],
+      },
+    });
+
+    // git ignore rc file
+    const excludeFilePath = `${appRootPath.path}/.git/info/exclude`;
+    const excludeFileContent = await fs
+      .readFileSync(excludeFilePath)
+      .toString();
+    if (!excludeFileContent.includes(`${TOOL_NAME}rc.json`)) {
+      await fs.appendFileSync(
+        `${appRootPath.path}/.git/info/exclude`,
+        `\n${TOOL_NAME}rc.json`
+      );
+    }
+
+    // generate rc file
+    nconf.set("notionProjectPageName", projectName);
+    nconf.set("notionProjectPageId", notionProjectPageId);
+    nconf.save((error: Error) => {
+      if (error) this.error(error);
+    });
   }
 }
