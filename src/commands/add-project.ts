@@ -22,7 +22,7 @@ export default class AddProject extends Command {
     } = this.parse(AddProject);
 
     // check if tool is initialized
-    nconf.file({ file: `${appRootPath.path}/${TOOL_NAME}rc.json` });
+    nconf.file({ file: `${process.cwd()}/${TOOL_NAME}rc.json` });
     const existingNotionProjectPageId = nconf.get("notionProjectPageId");
 
     if (existingNotionProjectPageId) {

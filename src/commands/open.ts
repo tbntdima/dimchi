@@ -1,5 +1,4 @@
 import { Command } from "@oclif/command";
-import { Client } from "@notionhq/client";
 import * as open from "open";
 import * as getCurrentGitBranch from "current-git-branch";
 import * as nconf from "nconf";
@@ -15,8 +14,8 @@ export default class Open extends Command {
   async run() {
     const notion = await getNotion();
     const gitBranch = getCurrentGitBranch();
-    nconf.file({ file: `${appRootPath.path}/${TOOL_NAME}rc.json` });
-    const potionProjectPageId = nconf.get("notionProjectPageId");
+    nconf.file({ file: `${process.cwd()}/${TOOL_NAME}rc.json` });
+    const notionProjectPageId = nconf.get("notionProjectPageId");
 
     // check if exists & open
 
@@ -34,7 +33,7 @@ export default class Open extends Command {
     else {
       const { id: taskPageId } = await notion.pages.create({
         parent: {
-          page_id: potionProjectPageId,
+          page_id: notionProjectPageId,
         },
         properties: {
           // @ts-ignore
