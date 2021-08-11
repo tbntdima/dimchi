@@ -14,7 +14,6 @@
   "devDependencies": {
     "@oclif/dev-cli": "^1.26.0",
     "@oclif/test": "^1.2.8",
-    "@types/app-root-path": "^1.2.4",
     "@types/chai": "^4.2.16",
     "@types/current-git-branch": "^1.1.2",
     "@types/inquirer": "^7.3.3",
@@ -71,7 +70,6 @@
     "@oclif/command": "^1.8.0",
     "@oclif/config": "^1.17.0",
     "@oclif/plugin-help": "^3.2.2",
-    "app-root-path": "^3.0.0",
     "chalk": "^4.1.2",
     "current-git-branch": "^1.1.0",
     "inquirer": "^8.1.2",
