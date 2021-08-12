@@ -1,25 +1,64 @@
-import {Command, flags} from '@oclif/command'
+import { Command } from "@oclif/command";
+import { getNotion } from "../utils/notion";
+import {
+  getCurrentGitBranchName,
+  getProjectNotionDatabaseId,
+} from "../utils/rootData";
 
 export default class AddLog extends Command {
-  static description = 'describe the command here'
+  static description = "describe the command here";
 
-  static flags = {
-    help: flags.help({char: 'h'}),
-    // flag with a value (-n, --name=VALUE)
-    name: flags.string({char: 'n', description: 'name to print'}),
-    // flag with no value (-f, --force)
-    force: flags.boolean({char: 'f'}),
-  }
-
-  static args = [{name: 'file'}]
+  static args = [{ name: "message" }];
 
   async run() {
-    const {args, flags} = this.parse(AddLog)
+    const {
+      args: { message },
+    } = this.parse(AddLog);
 
-    const name = flags.name ?? 'world'
-    this.log(`hello ${name} from /Users/dmitriyan/Desktop/PROJECTS/dimchi/src/commands/add-log.ts`)
-    if (args.file && flags.force) {
-      this.log(`you input --force and --file: ${args.file}`)
+    const notion = await getNotion();
+    const projectNotionDatabaseId = getProjectNotionDatabaseId();
+    const gitBranchName = getCurrentGitBranchName();
+
+    // search in database for current task
+    const { results: databaseQueryResults } = await notion.databases.query({
+      database_id: projectNotionDatabaseId,
+      filter: {
+        property: "SubPageName",
+        text: { equals: gitBranchName },
+      },
+    });
+    if (databaseQueryResults.length > 0) {
+      const taskLogDatabaseId =
+        // @ts-ignore
+        databaseQueryResults[0].properties.SubPageLogId.rich_text[0].plain_text;
+
+      const databaseTaskRowPageId = databaseQueryResults[0].id;
+
+      // update log
+      await notion.pages.create({
+        parent: { database_id: taskLogDatabaseId },
+        properties: {
+          // @ts-ignore
+          Action: {
+            title: [{ type: "text", text: { content: message } }],
+          },
+          // @ts-ignore
+          ActionDate: {
+            date: { start: new Date().toISOString().split("T")[0] },
+          },
+        },
+      });
+
+      // update database last updated
+      await notion.pages.update({
+        page_id: databaseTaskRowPageId,
+        properties: {
+          // @ts-ignore
+          SubPageLogLastUpdated: {
+            date: { start: new Date().toISOString().split("T")[0] },
+          },
+        },
+      });
     }
   }
 }
