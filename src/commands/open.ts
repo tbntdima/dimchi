@@ -1,9 +1,6 @@
 import { Command } from "@oclif/command";
 import * as open from "open";
 
-import * as nconf from "nconf";
-
-import { TOOL_NAME } from "../consts";
 import { getNotion } from "../utils/notion";
 import {
   getCurrentGitBranchName,
@@ -17,7 +14,6 @@ export default class Open extends Command {
 
   async run() {
     const notion = await getNotion();
-    nconf.file({ file: `./${TOOL_NAME}rc.json` });
     const gitBranchName = getCurrentGitBranchName();
 
     // Check if exists & open
@@ -88,10 +84,4 @@ export default class Open extends Command {
       open(getNotionAppLink(taskPageId));
     }
   }
-}
-
-function sleep(ms: number) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
 }

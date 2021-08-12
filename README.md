@@ -28,23 +28,49 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`dimchi add-project PROJECTNAME`](#dimchi-add-project-projectname)
+* [`dimchi add-log [FILE]`](#dimchi-add-log-file)
+* [`dimchi add-project`](#dimchi-add-project)
+* [`dimchi create`](#dimchi-create)
 * [`dimchi hello [FILE]`](#dimchi-hello-file)
 * [`dimchi help [COMMAND]`](#dimchi-help-command)
 * [`dimchi init`](#dimchi-init)
 * [`dimchi open`](#dimchi-open)
 
-## `dimchi add-project PROJECTNAME`
+## `dimchi add-log [FILE]`
+
+describe the command here
 
 ```
 USAGE
-  $ dimchi add-project PROJECTNAME
+  $ dimchi add-log [FILE]
 
-ARGUMENTS
-  PROJECTNAME  Name of the project
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+```
+
+_See code: [src/commands/add-log.ts](https://github.com/tbntdima/dimchi/blob/v0.0.4/src/commands/add-log.ts)_
+
+## `dimchi add-project`
+
+```
+USAGE
+  $ dimchi add-project
 ```
 
 _See code: [src/commands/add-project.ts](https://github.com/tbntdima/dimchi/blob/v0.0.4/src/commands/add-project.ts)_
+
+## `dimchi create`
+
+describe the command here
+
+```
+USAGE
+  $ dimchi create
+```
+
+_See code: [src/commands/create.ts](https://github.com/tbntdima/dimchi/blob/v0.0.4/src/commands/create.ts)_
 
 ## `dimchi hello [FILE]`
 
