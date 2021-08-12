@@ -1,49 +1,48 @@
 import { Command } from "@oclif/command";
 import * as nconf from "nconf";
-import * as appRootPath from "app-root-path";
 import * as fs from "fs";
+import * as inquirer from "inquirer";
 
 import { TOOL_NAME } from "../consts";
 import { getNotion } from "../utils/notion";
-import { getNotionRootPageId } from "../utils/rootData";
 
 export default class AddProject extends Command {
-  static args = [
-    {
-      name: "projectName",
-      required: true,
-      description: "Name of the project",
-    },
-  ];
-
   async run() {
-    const {
-      args: { projectName },
-    } = this.parse(AddProject);
-
-    // check if tool is initialized
+    // Check if tool is initialized
     nconf.file({ file: `./${TOOL_NAME}rc.json` });
-    const existingNotionProjectPageId = nconf.get("notionProjectPageId");
+    const existingProjectNotionPageId = nconf.get("projectNotionPageId");
 
-    if (existingNotionProjectPageId) {
-      this.log("Project was already added");
+    if (existingProjectNotionPageId) {
+      this.log("Seems like the project has already been added.");
       return;
     }
 
-    // create a notion page with projectName
-    const notion = await getNotion();
-    const notionRootPageId = await getNotionRootPageId();
-    const { id: notionProjectPageId } = await notion.pages.create({
-      parent: {
-        page_id: notionRootPageId,
+    // Add notion project id to rc file & create a database
+    // Ask for a project ID
+    const { projectNotionPageId } = await inquirer.prompt([
+      {
+        type: "text",
+        name: "projectNotionPageId",
+        message: "Project notion page id:",
       },
+    ]);
+
+    const notion = await getNotion();
+
+    const { id: projectNotionDatabaseId } = await notion.databases.create({
+      parent: {
+        page_id: projectNotionPageId,
+      },
+      title: [{ type: "text", text: { content: "_database" } }],
       properties: {
-        // @ts-ignore
-        title: [{ text: { content: projectName } }],
+        SubPageName: { title: {} },
+        SubPageNameId: { rich_text: {} },
+        SubPageLogId: { rich_text: {} },
+        SubPageLogLastUpdated: { date: {} },
       },
     });
 
-    // git ignore rc file
+    // add rc file to .git/info/exclude so it's ignored by git
     const excludeFilePath = `./.git/info/exclude`;
     const excludeFileContent = await fs
       .readFileSync(excludeFilePath)
@@ -53,10 +52,12 @@ export default class AddProject extends Command {
     }
 
     // generate rc file
-    nconf.set("notionProjectPageName", projectName);
-    nconf.set("notionProjectPageId", notionProjectPageId);
+    nconf.set("projectNotionPageId", projectNotionPageId);
+    nconf.set("projectNotionDatabaseId", projectNotionDatabaseId);
     nconf.save((error: Error) => {
       if (error) this.error(error);
     });
+
+    this.log("Project has been added.");
   }
 }

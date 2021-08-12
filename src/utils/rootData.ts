@@ -1,33 +1,13 @@
 import * as keytar from "keytar";
 
-import {
-  service,
-  accountNotionRootPageId,
-  accountNotionRootDatabaseId,
-} from "../commands/init";
+import { service, accountNotionSecret } from "../commands/init";
 
-export const getNotionRootPageId = async (): Promise<string> => {
-  const notionRootPageId = await keytar.getPassword(
-    service,
-    accountNotionRootPageId
-  );
+export const getNotionSecret = async (): Promise<string> => {
+  const secret = await keytar.getPassword(service, accountNotionSecret);
 
-  if (!notionRootPageId) {
-    throw new Error("Tool is not initialized");
+  if (!secret) {
+    throw new Error("Seems like tool is not initialized.");
   }
 
-  return notionRootPageId;
-};
-
-export const getNotionRootDatabaseId = async (): Promise<string> => {
-  const notionRootDatabaseId = await keytar.getPassword(
-    service,
-    accountNotionRootDatabaseId
-  );
-
-  if (!notionRootDatabaseId) {
-    throw new Error("Tool is not initialized");
-  }
-
-  return notionRootDatabaseId;
+  return secret;
 };
