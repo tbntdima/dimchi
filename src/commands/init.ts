@@ -30,7 +30,7 @@ export default class Init extends Command {
     // Create/update
     const notionSecret = await keytar.getPassword(service, accountNotionSecret);
     if (!notionSecret || flags.update) {
-      const { notionSecretInput, notionRootPageId } = await inquirer.prompt([
+      const { notionSecretInput } = await inquirer.prompt([
         {
           type: "password",
           name: "notionSecretInput",
