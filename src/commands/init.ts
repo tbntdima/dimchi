@@ -1,7 +1,6 @@
 import { Command, flags } from "@oclif/command";
 import * as inquirer from "inquirer";
 import * as keytar from "keytar";
-import * as chalk from "chalk";
 
 import { TOOL_NAME } from "../consts";
 
@@ -23,7 +22,7 @@ export default class Init extends Command {
     if (flags.destroy) {
       await keytar.deletePassword(service, accountNotionSecret);
 
-      this.log(chalk.green("Tool has been uninitialized."));
+      this.log("Tool has been uninitialized.");
 
       return;
     }
@@ -47,14 +46,12 @@ export default class Init extends Command {
         );
 
         this.log(
-          chalk.green(
-            flags.update
-              ? "Tool initialization has been updated."
-              : `Tool has been successfully initialized 🚀\nYou are ready to add a project.\nTry "${TOOL_NAME} add-project" command.`
-          )
+          flags.update
+            ? "Tool initialization has been updated."
+            : `Tool has been successfully initialized 🚀\nYou are ready to add a project.\nTry "${TOOL_NAME} add-project" command.`
         );
       } catch (e) {
-        this.log(chalk.red(e));
+        this.log(e);
       }
 
       return;
