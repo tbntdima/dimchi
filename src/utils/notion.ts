@@ -1,11 +1,10 @@
 import { Client } from "@notionhq/client";
 import * as keytar from "keytar";
 
+import { getNotionSecret } from "./rootData";
+
 export const getNotion = async (): Promise<Client> => {
-  const notionSecret = await keytar.getPassword(
-    "dimchi",
-    "dimchi-notion-secret"
-  );
+  const notionSecret = await getNotionSecret();
 
   if (notionSecret) {
     const notion = new Client({

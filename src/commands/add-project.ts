@@ -36,7 +36,7 @@ export default class AddProject extends Command {
       title: [{ type: "text", text: { content: "_database" } }],
       properties: {
         SubPageName: { title: {} },
-        SubPageNameId: { rich_text: {} },
+        SubPageId: { rich_text: {} },
         SubPageLogId: { rich_text: {} },
         SubPageLogLastUpdated: { date: {} },
       },

@@ -1,62 +1,90 @@
 import { Command } from "@oclif/command";
 import * as open from "open";
-import * as getCurrentGitBranch from "current-git-branch";
+
 import * as nconf from "nconf";
-import * as appRootPath from "app-root-path";
 
 import { TOOL_NAME } from "../consts";
 import { getNotion } from "../utils/notion";
-import { getNotionRootDatabaseId } from "../utils/rootData";
+import {
+  getCurrentGitBranchName,
+  getProjectNotionPageid,
+  getProjectNotionDatabaseId,
+  getNotionAppLink,
+} from "../utils/rootData";
 
 export default class Open extends Command {
   static description = "Open current task in notion";
 
   async run() {
     const notion = await getNotion();
-    const gitBranch = getCurrentGitBranch();
     nconf.file({ file: `./${TOOL_NAME}rc.json` });
-    const notionProjectPageId = nconf.get("notionProjectPageId");
+    const gitBranchName = getCurrentGitBranchName();
 
-    // check if exists & open
+    // Check if exists & open
+    const projectNotionDatabaseId = getProjectNotionDatabaseId();
 
-    const { results: taskPages } = await notion.search({
-      // @ts-ignore
-      query: gitBranch,
-      filter: { value: "page", property: "object" },
+    const { results: databaseQueryResults } = await notion.databases.query({
+      database_id: projectNotionDatabaseId,
+      filter: {
+        property: "SubPageName",
+        text: { equals: gitBranchName },
+      },
     });
 
-    const foundTaskPage = taskPages[0];
-    if (foundTaskPage) {
-      open(getNotionAppLink(foundTaskPage.id));
-    }
-    // create a new page & add to database
-    else {
+    if (databaseQueryResults.length > 0) {
+      // open page
+      // TODO: add plugin to enchance search (maybe select)
+      const existingTaskNotionPageId =
+        // @ts-ignore
+        databaseQueryResults[0].properties.SubPageId.rich_text[0].plain_text;
+      open(getNotionAppLink(existingTaskNotionPageId));
+    } else {
+      // create task page
+      const notionProjectPageId = getProjectNotionPageid();
+
       const { id: taskPageId } = await notion.pages.create({
         parent: {
           page_id: notionProjectPageId,
         },
         properties: {
           // @ts-ignore
-          title: [{ text: { content: gitBranch } }],
+          title: [{ text: { content: gitBranchName } }],
         },
       });
-
-      const notionRootDatabaseId = await getNotionRootDatabaseId();
-
-      await notion.pages.create({
-        parent: { database_id: notionRootDatabaseId },
+      // create task log database
+      const { id: taskLogDatabaseId } = await notion.databases.create({
+        parent: {
+          page_id: taskPageId,
+        },
+        title: [{ type: "text", text: { content: "_progress-log" } }],
         properties: {
-          PageName: {
-            // @ts-ignore
-            title: [{ type: "text", text: { content: gitBranch } }],
+          Action: { title: {} },
+          ActionDate: { date: {} },
+        },
+      });
+      // add task and log to project database
+      await notion.pages.create({
+        parent: { database_id: projectNotionDatabaseId },
+        properties: {
+          // @ts-ignore
+          SubPageName: {
+            title: [{ type: "text", text: { content: gitBranchName } }],
           },
           // @ts-ignore
-          PageId: {
+          SubPageId: {
             rich_text: [{ type: "text", text: { content: taskPageId } }],
+          },
+          // @ts-ignore
+          SubPageLogId: {
+            rich_text: [{ type: "text", text: { content: taskLogDatabaseId } }],
+          },
+          // @ts-ignore
+          SubPageLogLastUpdated: {
+            date: { start: new Date().toISOString().split("T")[0] },
           },
         },
       });
-
+      // open page
       open(getNotionAppLink(taskPageId));
     }
   }
@@ -66,8 +94,4 @@ function sleep(ms: number) {
   return new Promise((resolve) => {
     setTimeout(resolve, ms);
   });
-}
-
-function getNotionAppLink(pageId: string) {
-  return `notion://notion.so/${pageId.split("-").join("")}`;
 }
