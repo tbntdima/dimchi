@@ -31,28 +31,31 @@ export default class Log extends Command {
         database_id: taskLogDatabaseId,
       });
 
-      const logs = results.map((log) => {
-        return {
+      const logs = results
+        .map((log) => {
+          return {
+            // @ts-ignore
+            action: log.properties.Action.title[0]?.plain_text,
+            // @ts-ignore
+            date: log.properties.ActionDate?.date.start,
+          };
+        })
+        .filter((log) => log.action && log.date)
+        .sort((logA, logB) => {
           // @ts-ignore
-          action: log.properties.Action.title[0].plain_text,
-          // @ts-ignore
-          date: log.properties.ActionDate.date.start,
-        };
-      });
-
-      const groupedLogs = logs.reduce(
-        (_groupedLogs: Record<string, { actions: string[] }>, log) => {
+          return new Date(logA.date) - new Date(logB.date);
+        })
+        .map((log) => ({ action: log.action, date: log.date.split("T")[0] }))
+        .reduce((_groupedLogs: Record<string, { actions: string[] }>, log) => {
           if (_groupedLogs[log.date]) {
             _groupedLogs[log.date].actions.push(log.action);
           } else {
             _groupedLogs[log.date] = { actions: [log.action] };
           }
           return _groupedLogs;
-        },
-        {}
-      );
+        }, {});
 
-      for (const [date, values] of Object.entries(groupedLogs)) {
+      for (const [date, values] of Object.entries(logs)) {
         console.log(date);
         values.actions.forEach((action) => console.log(`- ${action}`));
       }

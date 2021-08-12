@@ -76,7 +76,7 @@ export default class Open extends Command {
           },
           // @ts-ignore
           SubPageLogLastUpdated: {
-            date: { start: new Date().toISOString().split("T")[0] },
+            date: { start: new Date().toISOString() },
           },
         },
       });

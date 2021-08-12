@@ -1,20 +1,16 @@
 import { Command } from "@oclif/command";
+import * as open from "open";
 import { getNotion } from "../utils/notion";
 import {
   getCurrentGitBranchName,
+  getNotionAppLink,
   getProjectNotionDatabaseId,
 } from "../utils/rootData";
 
-export default class AddLog extends Command {
+export default class EditLogs extends Command {
   static description = "describe the command here";
 
-  static args = [{ name: "message" }];
-
   async run() {
-    const {
-      args: { message },
-    } = this.parse(AddLog);
-
     const notion = await getNotion();
     const projectNotionDatabaseId = getProjectNotionDatabaseId();
     const gitBranchName = getCurrentGitBranchName();
@@ -27,27 +23,15 @@ export default class AddLog extends Command {
         text: { equals: gitBranchName },
       },
     });
+
     if (databaseQueryResults.length > 0) {
+      const databaseTaskRowPageId = databaseQueryResults[0].id;
+
       const taskLogDatabaseId =
         // @ts-ignore
         databaseQueryResults[0].properties.SubPageLogId.rich_text[0].plain_text;
 
-      const databaseTaskRowPageId = databaseQueryResults[0].id;
-
-      // update log
-      await notion.pages.create({
-        parent: { database_id: taskLogDatabaseId },
-        properties: {
-          // @ts-ignore
-          Action: {
-            title: [{ type: "text", text: { content: message } }],
-          },
-          // @ts-ignore
-          ActionDate: {
-            date: { start: new Date().toISOString() },
-          },
-        },
-      });
+      open(getNotionAppLink(taskLogDatabaseId));
 
       // update database last updated
       await notion.pages.update({

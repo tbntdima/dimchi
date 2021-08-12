@@ -30,10 +30,11 @@ USAGE
 <!-- commands -->
 * [`dimchi add-log [MESSAGE]`](#dimchi-add-log-message)
 * [`dimchi add-project`](#dimchi-add-project)
+* [`dimchi edit-logs [FILE]`](#dimchi-edit-logs-file)
 * [`dimchi hello [FILE]`](#dimchi-hello-file)
 * [`dimchi help [COMMAND]`](#dimchi-help-command)
 * [`dimchi init`](#dimchi-init)
-* [`dimchi log [FILE]`](#dimchi-log-file)
+* [`dimchi log`](#dimchi-log)
 * [`dimchi open`](#dimchi-open)
 
 ## `dimchi add-log [MESSAGE]`
@@ -55,6 +56,22 @@ USAGE
 ```
 
 _See code: [src/commands/add-project.ts](https://github.com/tbntdima/dimchi/blob/v0.0.4/src/commands/add-project.ts)_
+
+## `dimchi edit-logs [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ dimchi edit-logs [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+```
+
+_See code: [src/commands/edit-logs.ts](https://github.com/tbntdima/dimchi/blob/v0.0.4/src/commands/edit-logs.ts)_
 
 ## `dimchi hello [FILE]`
 
@@ -108,18 +125,13 @@ OPTIONS
 
 _See code: [src/commands/init.ts](https://github.com/tbntdima/dimchi/blob/v0.0.4/src/commands/init.ts)_
 
-## `dimchi log [FILE]`
+## `dimchi log`
 
 describe the command here
 
 ```
 USAGE
-  $ dimchi log [FILE]
-
-OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
+  $ dimchi log
 ```
 
 _See code: [src/commands/log.ts](https://github.com/tbntdima/dimchi/blob/v0.0.4/src/commands/log.ts)_
