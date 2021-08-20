@@ -6,7 +6,7 @@ import {
 } from "../utils/rootData";
 
 export default class AddLog extends Command {
-  static description = "describe the command here";
+  static description = "Add a log message of your progress.";
 
   static args = [{ name: "message" }];
 

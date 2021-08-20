@@ -7,6 +7,9 @@ import { TOOL_NAME } from "../consts";
 import { getNotion } from "../utils/notion";
 
 export default class AddProject extends Command {
+  static description =
+    "Connect your local repository with notion project page.";
+
   async run() {
     // Check if tool is initialized
     nconf.file({ file: `./${TOOL_NAME}rc.json` });

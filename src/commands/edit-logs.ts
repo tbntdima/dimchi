@@ -8,7 +8,7 @@ import {
 } from "../utils/rootData";
 
 export default class EditLogs extends Command {
-  static description = "describe the command here";
+  static description = "Edit current project's logs.";
 
   async run() {
     const notion = await getNotion();

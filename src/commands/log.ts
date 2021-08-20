@@ -6,7 +6,7 @@ import {
 } from "../utils/rootData";
 
 export default class Log extends Command {
-  static description = "describe the command here";
+  static description = "Print logs of current project.";
 
   async run() {
     const notion = await getNotion();

@@ -11,7 +11,7 @@ import {
 } from "../utils/rootData";
 
 export default class Open extends Command {
-  static description = "Open current task in notion";
+  static description = "Open or create a new task page in notion.";
 
   static flags = {
     name: flags.string({ char: "n" }),

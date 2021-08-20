@@ -57,7 +57,6 @@ That's it, you are set to go 🚀
 - [`dimchi add-log [MESSAGE]`](#dimchi-add-log-message)
 - [`dimchi add-project`](#dimchi-add-project)
 - [`dimchi edit-logs [FILE]`](#dimchi-edit-logs-file)
-- [`dimchi hello [FILE]`](#dimchi-hello-file)
 - [`dimchi help [COMMAND]`](#dimchi-help-command)
 - [`dimchi init`](#dimchi-init)
 - [`dimchi log`](#dimchi-log)
@@ -98,26 +97,6 @@ OPTIONS
 ```
 
 _See code: [src/commands/edit-logs.ts](https://github.com/tbntdima/dimchi/blob/v0.0.4/src/commands/edit-logs.ts)_
-
-## `dimchi hello [FILE]`
-
-describe the command here
-
-```
-USAGE
-  $ dimchi hello [FILE]
-
-OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
-
-EXAMPLE
-  $ dimchi hello
-  hello world from ./src/hello.ts!
-```
-
-_See code: [src/commands/hello.ts](https://github.com/tbntdima/dimchi/blob/v0.0.4/src/commands/hello.ts)_
 
 ## `dimchi help [COMMAND]`
 
