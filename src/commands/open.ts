@@ -1,5 +1,6 @@
-import { Command } from "@oclif/command";
+import { Command, flags } from "@oclif/command";
 import * as open from "open";
+import * as ora from "ora";
 
 import { getNotion } from "../utils/notion";
 import {
@@ -12,7 +13,16 @@ import {
 export default class Open extends Command {
   static description = "Open current task in notion";
 
+  static flags = {
+    name: flags.string({ char: "n" }),
+  };
+
   async run() {
+    const { flags } = this.parse(Open);
+
+    const spinner = ora();
+    spinner.start();
+
     const notion = await getNotion();
     const gitBranchName = getCurrentGitBranchName();
 
@@ -44,7 +54,7 @@ export default class Open extends Command {
         },
         properties: {
           // @ts-ignore
-          title: [{ text: { content: gitBranchName } }],
+          title: [{ text: { content: flags.name ?? gitBranchName } }],
         },
       });
       // create task log database
@@ -83,5 +93,6 @@ export default class Open extends Command {
       // open page
       open(getNotionAppLink(taskPageId));
     }
+    spinner.stop();
   }
 }
