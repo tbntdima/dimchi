@@ -70,7 +70,7 @@ USAGE
   $ dimchi add-log [MESSAGE]
 ```
 
-_See code: [src/commands/add-log.ts](https://github.com/tbntdima/dimchi/blob/v0.0.4/src/commands/add-log.ts)_
+_See code: [src/commands/add-log.ts](https://github.com/tbntdima/dimchi/blob/v0.1.0/src/commands/add-log.ts)_
 
 ## `dimchi add-project`
 
@@ -81,7 +81,7 @@ USAGE
   $ dimchi add-project
 ```
 
-_See code: [src/commands/add-project.ts](https://github.com/tbntdima/dimchi/blob/v0.0.4/src/commands/add-project.ts)_
+_See code: [src/commands/add-project.ts](https://github.com/tbntdima/dimchi/blob/v0.1.0/src/commands/add-project.ts)_
 
 ## `dimchi edit-logs`
 
@@ -92,7 +92,7 @@ USAGE
   $ dimchi edit-logs
 ```
 
-_See code: [src/commands/edit-logs.ts](https://github.com/tbntdima/dimchi/blob/v0.0.4/src/commands/edit-logs.ts)_
+_See code: [src/commands/edit-logs.ts](https://github.com/tbntdima/dimchi/blob/v0.1.0/src/commands/edit-logs.ts)_
 
 ## `dimchi help [COMMAND]`
 
@@ -124,7 +124,7 @@ OPTIONS
   -u, --update
 ```
 
-_See code: [src/commands/init.ts](https://github.com/tbntdima/dimchi/blob/v0.0.4/src/commands/init.ts)_
+_See code: [src/commands/init.ts](https://github.com/tbntdima/dimchi/blob/v0.1.0/src/commands/init.ts)_
 
 ## `dimchi log`
 
@@ -135,7 +135,7 @@ USAGE
   $ dimchi log
 ```
 
-_See code: [src/commands/log.ts](https://github.com/tbntdima/dimchi/blob/v0.0.4/src/commands/log.ts)_
+_See code: [src/commands/log.ts](https://github.com/tbntdima/dimchi/blob/v0.1.0/src/commands/log.ts)_
 
 ## `dimchi open`
 
@@ -149,5 +149,5 @@ OPTIONS
   -n, --name=name
 ```
 
-_See code: [src/commands/open.ts](https://github.com/tbntdima/dimchi/blob/v0.0.4/src/commands/open.ts)_
+_See code: [src/commands/open.ts](https://github.com/tbntdima/dimchi/blob/v0.1.0/src/commands/open.ts)_
 <!-- commandsstop -->
