@@ -8,9 +8,9 @@ Simplify the process of writing notes by combining your workflow with cli and no
 [![License](https://img.shields.io/npm/l/dimchi.svg)](https://github.com/tbntdima/dimchi/blob/master/package.json)
 
 <!-- toc -->
-
-- [Usage](#usage)
-- [Commands](#commands)
+* [dimchi](#dimchi)
+* [Getting started](#getting-started)
+* [Commands](#commands)
 <!-- tocstop -->
 
 # Getting started
@@ -53,18 +53,17 @@ That's it, you are set to go 🚀
 # Commands
 
 <!-- commands -->
-
-- [`dimchi add-log [MESSAGE]`](#dimchi-add-log-message)
-- [`dimchi add-project`](#dimchi-add-project)
-- [`dimchi edit-logs [FILE]`](#dimchi-edit-logs-file)
-- [`dimchi help [COMMAND]`](#dimchi-help-command)
-- [`dimchi init`](#dimchi-init)
-- [`dimchi log`](#dimchi-log)
-- [`dimchi open`](#dimchi-open)
+* [`dimchi add-log [MESSAGE]`](#dimchi-add-log-message)
+* [`dimchi add-project`](#dimchi-add-project)
+* [`dimchi edit-logs`](#dimchi-edit-logs)
+* [`dimchi help [COMMAND]`](#dimchi-help-command)
+* [`dimchi init`](#dimchi-init)
+* [`dimchi log`](#dimchi-log)
+* [`dimchi open`](#dimchi-open)
 
 ## `dimchi add-log [MESSAGE]`
 
-describe the command here
+Add a log message of your progress.
 
 ```
 USAGE
@@ -75,6 +74,8 @@ _See code: [src/commands/add-log.ts](https://github.com/tbntdima/dimchi/blob/v0.
 
 ## `dimchi add-project`
 
+Connect your local repository with notion project page.
+
 ```
 USAGE
   $ dimchi add-project
@@ -82,18 +83,13 @@ USAGE
 
 _See code: [src/commands/add-project.ts](https://github.com/tbntdima/dimchi/blob/v0.0.4/src/commands/add-project.ts)_
 
-## `dimchi edit-logs [FILE]`
+## `dimchi edit-logs`
 
-describe the command here
+Edit current project's logs.
 
 ```
 USAGE
-  $ dimchi edit-logs [FILE]
-
-OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
+  $ dimchi edit-logs
 ```
 
 _See code: [src/commands/edit-logs.ts](https://github.com/tbntdima/dimchi/blob/v0.0.4/src/commands/edit-logs.ts)_
@@ -132,7 +128,7 @@ _See code: [src/commands/init.ts](https://github.com/tbntdima/dimchi/blob/v0.0.4
 
 ## `dimchi log`
 
-describe the command here
+Print logs of current project.
 
 ```
 USAGE
@@ -143,13 +139,15 @@ _See code: [src/commands/log.ts](https://github.com/tbntdima/dimchi/blob/v0.0.4/
 
 ## `dimchi open`
 
-Open current task in notion
+Open or create a new task page in notion.
 
 ```
 USAGE
   $ dimchi open
+
+OPTIONS
+  -n, --name=name
 ```
 
 _See code: [src/commands/open.ts](https://github.com/tbntdima/dimchi/blob/v0.0.4/src/commands/open.ts)_
-
 <!-- commandsstop -->
