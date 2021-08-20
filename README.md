@@ -1,5 +1,4 @@
-dimchi
-======
+# dimchi
 
 Simplify the process of writing notes by combining your workflow with cli and notes editor (notion.so)
 
@@ -9,33 +8,60 @@ Simplify the process of writing notes by combining your workflow with cli and no
 [![License](https://img.shields.io/npm/l/dimchi.svg)](https://github.com/tbntdima/dimchi/blob/master/package.json)
 
 <!-- toc -->
-* [Usage](#usage)
-* [Commands](#commands)
+
+- [Usage](#usage)
+- [Commands](#commands)
 <!-- tocstop -->
-# Usage
-<!-- usage -->
+
+# Getting started
+
 ```sh-session
 $ npm install -g dimchi
-$ dimchi COMMAND
-running command...
-$ dimchi (-v|--version|version)
-dimchi/0.0.4 darwin-x64 node-v14.17.3
-$ dimchi --help [COMMAND]
-USAGE
-  $ dimchi COMMAND
 ...
 ```
-<!-- usagestop -->
+
+## Global setup
+
+You need to do this only once.
+Follow [these steps from notion documentation](https://developers.notion.com/docs#step-1-create-an-integration) to get your integration token (notion secret key)
+
+Then run:
+
+```sh-session
+dimchi init
+```
+
+## Project setup
+
+You will need to do this for every new project.
+
+- open notion webapp
+- create a page project
+- on right top corner click on share, and share page with your integration
+- get page id from the url
+
+Then run:
+
+Then run:
+
+```sh-session
+dimchi add-project
+```
+
+That's it, you are set to go 🚀
+
 # Commands
+
 <!-- commands -->
-* [`dimchi add-log [MESSAGE]`](#dimchi-add-log-message)
-* [`dimchi add-project`](#dimchi-add-project)
-* [`dimchi edit-logs [FILE]`](#dimchi-edit-logs-file)
-* [`dimchi hello [FILE]`](#dimchi-hello-file)
-* [`dimchi help [COMMAND]`](#dimchi-help-command)
-* [`dimchi init`](#dimchi-init)
-* [`dimchi log`](#dimchi-log)
-* [`dimchi open`](#dimchi-open)
+
+- [`dimchi add-log [MESSAGE]`](#dimchi-add-log-message)
+- [`dimchi add-project`](#dimchi-add-project)
+- [`dimchi edit-logs [FILE]`](#dimchi-edit-logs-file)
+- [`dimchi hello [FILE]`](#dimchi-hello-file)
+- [`dimchi help [COMMAND]`](#dimchi-help-command)
+- [`dimchi init`](#dimchi-init)
+- [`dimchi log`](#dimchi-log)
+- [`dimchi open`](#dimchi-open)
 
 ## `dimchi add-log [MESSAGE]`
 
@@ -146,4 +172,5 @@ USAGE
 ```
 
 _See code: [src/commands/open.ts](https://github.com/tbntdima/dimchi/blob/v0.0.4/src/commands/open.ts)_
+
 <!-- commandsstop -->
