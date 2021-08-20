@@ -38,9 +38,9 @@ You will need to do this for every new project.
 - open notion webapp
 - create a page project
 - on right top corner click on share, and share page with your integration
+![Screenshot 2021-08-20 at 15 42 47](https://user-images.githubusercontent.com/28235413/130242535-53d02996-f7d0-4af5-a44e-f651c7b2403a.png)
 - get page id from the url
-
-Then run:
+![Screenshot 2021-08-20 at 15 43 41](https://user-images.githubusercontent.com/28235413/130242655-d9f4487b-cf5c-46c9-bf45-2a850c588899.png)
 
 Then run:
 
